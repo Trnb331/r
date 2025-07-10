@@ -8,7 +8,12 @@ const zodiacData = {
             "你在职场中思路清晰，能够高效完成分内工作。遇到突发状况时，冷静应对让同事刮目相看。适合主动请缨参与新项目，积累宝贵经验。注意与上级保持良好沟通，适时展现你的能力。",
             "今天适合团队合作，集思广益能带来意想不到的成果。你可能会被委以重任，建议提前做好准备。遇到分歧时，耐心倾听他人意见，有助于推动事情顺利进展。",
             "工作节奏较快，但你能游刃有余地应对。适合整理手头事务，为下阶段做规划。若有新想法，不妨与同事分享，或许能获得支持。",
-            "你在工作中表现出色，容易获得同事和上司的认可。适合总结经验，提升专业技能。遇到挑战时，保持自信，积极面对，困难很快会被你化解。"
+            "你在工作中表现出色，容易获得同事和上司的认可。适合总结经验，提升专业技能。遇到挑战时，保持自信，积极面对，困难很快会被你化解。",
+            "今天适合创新思维，提出新的解决方案。你的独特视角可能会带来突破性进展。",
+            "工作中遇到贵人相助，适合主动寻求合作机会。团队氛围和谐，沟通顺畅。",
+            "适合参加培训或学习新技能，为未来发展打下基础。知识就是力量。",
+            "今天工作效率很高，适合处理重要项目。专注力强，容易获得好结果。",
+            "适合与同事分享经验，互相学习，共同进步。团队合作是成功的关键。"
         ],
         love: [
             "感情生活温馨甜蜜，有伴侣者与另一半的互动更加频繁，彼此间的理解和包容度提升。单身的你有机会在社交场合遇到心仪对象，不妨多参加朋友聚会或兴趣活动。今天适合表达内心真实的情感，哪怕是小小的关心，也能让对方感受到你的温暖。",
@@ -466,7 +471,17 @@ const dailyAdvices = [
     "保持乐观心态，困难只是暂时的。",
     "多帮助他人，善有善报，好运自然来。",
     "注意饮食健康，多吃蔬果，保持营养均衡。",
-    "保持好奇心，探索新事物，丰富生活。"
+    "保持好奇心，探索新事物，丰富生活。",
+    "今天适合整理环境，清理杂物，让心情更加舒畅。",
+    "尝试新的兴趣爱好，可能会发现意想不到的乐趣。",
+    "与同事多交流，增进团队合作，提升工作效率。",
+    "今天适合制定计划，为未来目标做好规划。",
+    "保持微笑，积极面对挑战，好运自然降临。",
+    "多关注身边的人，给予关心和支持。",
+    "今天适合学习新技能，提升个人竞争力。",
+    "保持耐心，事情会按照预期发展。",
+    "多与长辈交流，获得宝贵的人生经验。",
+    "今天适合反思过去，总结经验教训。"
 ];
 
 // 获取随机元素
@@ -485,22 +500,39 @@ function generateFortune(zodiac) {
         weekday: 'long'
     });
 
-    // 使用日期作为种子，确保同一天运势一致
+    // 使用日期和生肖名称作为种子，确保每个生肖每天都有不同的运势
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    const random = (seed * 9301 + 49297) % 233280;
-    const randomIndex = random % 5;
+    const zodiacSeed = zodiac.charCodeAt(0) + zodiac.charCodeAt(zodiac.length - 1);
+    const combinedSeed = seed + zodiacSeed;
+    
+    // 为每个运势类型生成不同的随机索引
+    const careerIndex = (combinedSeed * 9301 + 49297) % 233280 % data.career.length;
+    const loveIndex = (combinedSeed * 49297 + 9301) % 233280 % data.love.length;
+    const wealthIndex = (combinedSeed * 233280 + 49297) % 233280 % data.wealth.length;
+    const healthIndex = (combinedSeed * 49297 + 233280) % 233280 % data.health.length;
+    
+    // 为幸运信息生成不同的随机选择
+    const colorIndex = (combinedSeed * 9301) % data.lucky.colors.length;
+    const numberIndex = (combinedSeed * 49297) % data.lucky.numbers.length;
+    const directionIndex = (combinedSeed * 233280) % data.lucky.directions.length;
+    
+    // 为整体运势等级生成索引
+    const levelIndex = (combinedSeed * 9301 + 49297) % 233280 % fortuneLevels.length;
+    
+    // 为今日建议生成索引
+    const adviceIndex = (combinedSeed * 49297 + 9301) % 233280 % dailyAdvices.length;
 
     return {
         date: dateStr,
-        level: fortuneLevels[randomIndex % fortuneLevels.length],
-        career: data.career[randomIndex],
-        love: data.love[randomIndex],
-        wealth: data.wealth[randomIndex],
-        health: data.health[randomIndex],
-        luckyColor: getRandomElement(data.lucky.colors),
-        luckyNumber: getRandomElement(data.lucky.numbers),
-        luckyDirection: getRandomElement(data.lucky.directions),
-        advice: getRandomElement(dailyAdvices)
+        level: fortuneLevels[levelIndex],
+        career: data.career[careerIndex],
+        love: data.love[loveIndex],
+        wealth: data.wealth[wealthIndex],
+        health: data.health[healthIndex],
+        luckyColor: data.lucky.colors[colorIndex],
+        luckyNumber: data.lucky.numbers[numberIndex],
+        luckyDirection: data.lucky.directions[directionIndex],
+        advice: dailyAdvices[adviceIndex]
     };
 }
 
@@ -1041,20 +1073,40 @@ function generateConstellationFortune(constellation) {
         day: 'numeric',
         weekday: 'long'
     });
+
+    // 使用日期和星座名称作为种子，确保每个星座每天都有不同的运势
     const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
-    const random = (seed * 9301 + 49297 + constellation.charCodeAt(0)) % 233280;
-    const randomIndex = random % 5;
+    const constellationSeed = constellation.charCodeAt(0) + constellation.charCodeAt(constellation.length - 1);
+    const combinedSeed = seed + constellationSeed;
+    
+    // 为每个运势类型生成不同的随机索引
+    const careerIndex = (combinedSeed * 9301 + 49297) % 233280 % data.career.length;
+    const loveIndex = (combinedSeed * 49297 + 9301) % 233280 % data.love.length;
+    const wealthIndex = (combinedSeed * 233280 + 49297) % 233280 % data.wealth.length;
+    const healthIndex = (combinedSeed * 49297 + 233280) % 233280 % data.health.length;
+    
+    // 为幸运信息生成不同的随机选择
+    const colorIndex = (combinedSeed * 9301) % data.lucky.colors.length;
+    const numberIndex = (combinedSeed * 49297) % data.lucky.numbers.length;
+    const directionIndex = (combinedSeed * 233280) % data.lucky.directions.length;
+    
+    // 为整体运势等级生成索引
+    const levelIndex = (combinedSeed * 9301 + 49297) % 233280 % fortuneLevels.length;
+    
+    // 为今日建议生成索引
+    const adviceIndex = (combinedSeed * 49297 + 9301) % 233280 % dailyAdvices.length;
+
     return {
         date: dateStr,
-        level: fortuneLevels[randomIndex % fortuneLevels.length],
-        career: data.career[randomIndex],
-        love: data.love[randomIndex],
-        wealth: data.wealth[randomIndex],
-        health: data.health[randomIndex],
-        luckyColor: getRandomElement(data.lucky.colors),
-        luckyNumber: getRandomElement(data.lucky.numbers),
-        luckyDirection: getRandomElement(data.lucky.directions),
-        advice: getRandomElement(dailyAdvices)
+        level: fortuneLevels[levelIndex],
+        career: data.career[careerIndex],
+        love: data.love[loveIndex],
+        wealth: data.wealth[wealthIndex],
+        health: data.health[healthIndex],
+        luckyColor: data.lucky.colors[colorIndex],
+        luckyNumber: data.lucky.numbers[numberIndex],
+        luckyDirection: data.lucky.directions[directionIndex],
+        advice: dailyAdvices[adviceIndex]
     };
 }
 
