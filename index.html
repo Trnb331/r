@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>十二生肖每日运势</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🐾 十二生肖每日运势</h1>
+            <p class="subtitle">今日运势早知道，好运连连来报到</p>
+        </header>
+
+        <main class="main-content">
+            <!-- 运势类型选择区域 -->
+            <section class="fortune-type-selection" id="fortuneTypeSelection">
+                <h2 class="section-title">请选择运势类型</h2>
+                <div class="fortune-type-grid">
+                    <div class="fortune-type-item" data-type="zodiac">
+                        <span class="fortune-type-icon">🐾</span>
+                        <span class="fortune-type-name">十二生肖运势</span>
+                    </div>
+                    <div class="fortune-type-item" data-type="constellation">
+                        <span class="fortune-type-icon">✨</span>
+                        <span class="fortune-type-name">十二星座运势</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 生肖选择区域 -->
+            <section class="zodiac-selection" id="zodiacSelection" style="display: none;">
+                <h2 class="section-title">选择你的生肖</h2>
+                <div class="zodiac-grid">
+                    <div class="zodiac-item" data-zodiac="鼠">
+                        <div class="zodiac-icon">🐭</div>
+                        <span class="zodiac-name">鼠</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="牛">
+                        <div class="zodiac-icon">🐮</div>
+                        <span class="zodiac-name">牛</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="虎">
+                        <div class="zodiac-icon">🐯</div>
+                        <span class="zodiac-name">虎</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="兔">
+                        <div class="zodiac-icon">🐰</div>
+                        <span class="zodiac-name">兔</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="龙">
+                        <div class="zodiac-icon">🐲</div>
+                        <span class="zodiac-name">龙</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="蛇">
+                        <div class="zodiac-icon">🐍</div>
+                        <span class="zodiac-name">蛇</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="马">
+                        <div class="zodiac-icon">🐴</div>
+                        <span class="zodiac-name">马</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="羊">
+                        <div class="zodiac-icon">🐑</div>
+                        <span class="zodiac-name">羊</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="猴">
+                        <div class="zodiac-icon">🐒</div>
+                        <span class="zodiac-name">猴</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="鸡">
+                        <div class="zodiac-icon">🐔</div>
+                        <span class="zodiac-name">鸡</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="狗">
+                        <div class="zodiac-icon">🐕</div>
+                        <span class="zodiac-name">狗</span>
+                    </div>
+                    <div class="zodiac-item" data-zodiac="猪">
+                        <div class="zodiac-icon">🐷</div>
+                        <span class="zodiac-name">猪</span>
+                    </div>
+                </div>
+                <button class="back-btn" id="backToTypeBtn1">← 返回类型选择</button>
+            </section>
+
+            <!-- 星座选择区域 -->
+            <section class="constellation-selection" id="constellationSelection" style="display: none;">
+                <h2 class="section-title">选择你的星座</h2>
+                <div class="constellation-grid">
+                    <div class="constellation-item" data-constellation="白羊座"><div class="constellation-icon">♈</div><span class="constellation-name">白羊座</span></div>
+                    <div class="constellation-item" data-constellation="金牛座"><div class="constellation-icon">♉</div><span class="constellation-name">金牛座</span></div>
+                    <div class="constellation-item" data-constellation="双子座"><div class="constellation-icon">♊</div><span class="constellation-name">双子座</span></div>
+                    <div class="constellation-item" data-constellation="巨蟹座"><div class="constellation-icon">♋</div><span class="constellation-name">巨蟹座</span></div>
+                    <div class="constellation-item" data-constellation="狮子座"><div class="constellation-icon">♌</div><span class="constellation-name">狮子座</span></div>
+                    <div class="constellation-item" data-constellation="处女座"><div class="constellation-icon">♍</div><span class="constellation-name">处女座</span></div>
+                    <div class="constellation-item" data-constellation="天秤座"><div class="constellation-icon">♎</div><span class="constellation-name">天秤座</span></div>
+                    <div class="constellation-item" data-constellation="天蝎座"><div class="constellation-icon">♏</div><span class="constellation-name">天蝎座</span></div>
+                    <div class="constellation-item" data-constellation="射手座"><div class="constellation-icon">♐</div><span class="constellation-name">射手座</span></div>
+                    <div class="constellation-item" data-constellation="摩羯座"><div class="constellation-icon">♑</div><span class="constellation-name">摩羯座</span></div>
+                    <div class="constellation-item" data-constellation="水瓶座"><div class="constellation-icon">♒</div><span class="constellation-name">水瓶座</span></div>
+                    <div class="constellation-item" data-constellation="双鱼座"><div class="constellation-icon">♓</div><span class="constellation-name">双鱼座</span></div>
+                </div>
+                <button class="back-btn" id="backToTypeBtn2">← 返回类型选择</button>
+            </section>
+
+            <!-- 运势展示区域 -->
+            <section class="fortune-display" id="fortuneDisplay" style="display: none;">
+                <div class="fortune-header">
+                    <button class="back-btn" id="backBtn">← 返回选择</button>
+                    <h2 class="fortune-title">
+                        <span id="selectedZodiacName"></span> 今日运势
+                    </h2>
+                    <div class="date-info" id="currentDate"></div>
+                </div>
+
+                <div class="fortune-overview">
+                    <div class="overall-fortune">
+                        <div class="fortune-level" id="fortuneLevel">
+                            <span class="level-text">★★★★☆</span>
+                            <span class="level-desc">运势不错</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="fortune-details">
+                    <div class="fortune-card">
+                        <div class="card-header">
+                            <span class="card-icon">💼</span>
+                            <h3>事业运势</h3>
+                        </div>
+                        <div class="card-content" id="careerFortune">
+                            今日工作顺利，适合推进重要项目。
+                        </div>
+                    </div>
+
+                    <div class="fortune-card">
+                        <div class="card-header">
+                            <span class="card-icon">💕</span>
+                            <h3>爱情运势</h3>
+                        </div>
+                        <div class="card-content" id="loveFortune">
+                            感情稳定，单身者有机会遇到心仪对象。
+                        </div>
+                    </div>
+
+                    <div class="fortune-card">
+                        <div class="card-header">
+                            <span class="card-icon">💰</span>
+                            <h3>财运运势</h3>
+                        </div>
+                        <div class="card-content" id="wealthFortune">
+                            财运亨通，适合投资理财。
+                        </div>
+                    </div>
+
+                    <div class="fortune-card">
+                        <div class="card-header">
+                            <span class="card-icon">🏃</span>
+                            <h3>健康运势</h3>
+                        </div>
+                        <div class="card-content" id="healthFortune">
+                            身体状况良好，注意保持运动习惯。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lucky-info">
+                    <div class="lucky-item">
+                        <span class="lucky-label">幸运颜色：</span>
+                        <span class="lucky-value" id="luckyColor">红色</span>
+                    </div>
+                    <div class="lucky-item">
+                        <span class="lucky-label">幸运数字：</span>
+                        <span class="lucky-value" id="luckyNumber">8</span>
+                    </div>
+                    <div class="lucky-item">
+                        <span class="lucky-label">贵人方位：</span>
+                        <span class="lucky-value" id="luckyDirection">东南方</span>
+                    </div>
+                </div>
+
+                <div class="daily-advice">
+                    <h3>今日建议</h3>
+                    <p id="dailyAdvice">保持积极心态，把握机会，相信自己的判断。</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>仅供娱乐参考，祝您生活愉快！</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
